@@ -23,12 +23,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Database connection
 try {
   connection.authenticate();
-  console.log('Connection has been established successfully.');
+  //Create table in database
+  // Alter param only in production
+  connection.sync({alter:true}).then(() => {
+      console.log('Sync has been established successfully.');
+  }).catch((error) => {
+      console.log('Sync failled.', error);
+  })
 } catch (error) {
   console.error('Unable to connect to the database:', error);
 }
 
-require('./routes/home.route')(app);
+//All routes
+require('./routes/home')(app);
+require('./routes/user')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,7 +51,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {layout:false});
 });
 
 module.exports = app;
