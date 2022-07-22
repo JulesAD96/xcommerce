@@ -4,5 +4,5 @@
  */
 
 exports.index = (req, res) => {
-    res.render('pages/home', { title: 'Express' });
+    res.render('pages/home', { title: 'Express ecommerce' });
 }

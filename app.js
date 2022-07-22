@@ -5,10 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const { engine } = require('express-handlebars');
 
-
-const connection = require('./app/db.connexion');
 const app = express();
-
 
 app.engine('.hbs', engine({extname: '.hbs'}));
 app.set('view engine', '.hbs');
@@ -19,20 +16,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Database connection
-try {
-  connection.authenticate();
-  //Create table in database
-  // Alter param only in production
-  connection.sync({alter:true}).then(() => {
-      console.log('Sync has been established successfully.');
-  }).catch((error) => {
-      console.log('Sync failled.', error);
-  })
-} catch (error) {
-  console.error('Unable to connect to the database:', error);
-}
 
 //All routes
 require('./routes/home')(app);

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User login page</title>
+    <link rel="stylesheet" href="/bootstrap5.1/css/bootstrap.min.css">
+    <style>
+        .user_login {
+            width: 450px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="user_login shadow-sm">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="text-center">Login page</h4>
+                </div>
+                <div class="card-body">
+                    <form action="/login" method="post">
+                        <div class="form-group">
+                            <label for="email">Your email address</label>
+                            <input type="email" name="email" id="email" class="form-control my-1">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Your password</label>
+                            <input type="password" name="password" id="password" class="form-control my-1">
+                        </div>
+                       
+                        <div class="form-group text-center">
+                            <input type="submit" class="btn btn-primary my-1">
+                        </div>
+
+                        <div class="my-2">
+                            <a href="/register">Create an account here</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+ </body>
+</html>
