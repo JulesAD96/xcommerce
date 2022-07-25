@@ -2,9 +2,12 @@
  * Controller for users
  */
  const bcrypt = require('bcrypt');
+ const csrf = require('csurf')
  const db = require('../../models');
  
  const salt = bcrypt.genSaltSync(10);
+const csrfProtection = csrf({ cookie: true })
+
  
  /**
   * SHow register form
@@ -12,8 +15,8 @@
   * @param {*} res 
   * @returns 
   */
- exports.register_form = (req, res) => {
-     return res.render('pages/register', {layout:false});
+ exports.register_form = (req, res , csrfProtection) => {
+     return res.render('pages/register', {layout:false, csrfToken: req.csrfToken()});
  }
  
  /**
@@ -22,7 +25,7 @@
   * @param {*} res 
   * @returns
   */
- exports.register = (req, res) => {
+ exports.register = (req, res, csrfProtection) => {
      // Check if form is not empty
      if(Object.keys(req.body).length === 0) {
          return res.redirect('/register');

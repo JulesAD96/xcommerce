@@ -1,4 +1,7 @@
+const csrf = require('csurf')
+
 const UserController = require('../app/controllers/UserController');
+
 
 module.exports = app => {
   app.get('/register', UserController.register_form);
